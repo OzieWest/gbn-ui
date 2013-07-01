@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width" />
+	@Styles.Render("~/Content/foundation.min.css")
+	@Styles.Render("~/Content/normalize.css")
+	@Styles.Render("~/Content/Site.css")
+</head>
+<body>
+	<div class="row">
+		<div id="header">
+			<ul id="header_menu" class="breadcrumbs">
+				<li>@Html.ActionLink("Новости", "Index", "Home")</li>
+				<li>@Html.ActionLink("Скидки", "Index", "Home")</li>
+				<li>@Html.ActionLink("Игровые оценки", "Index", "Home")</li>
+				<li>@Html.ActionLink("Играем вместе", "Index", "Home")</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="container">
+			@Html.Partial("_searchbox")
+			<div class="large-9 columns">
+				@RenderBody()
+			</div>
+			<div class="large-3 columns">
+				@Html.Partial("_sidemenu")
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="footer">
+			<ul id="footer_menu" class="breadcrumbs">
+				<li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+				<li>@Html.ActionLink("О программе", "About", "Home")</li>
+				<li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

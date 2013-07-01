@@ -1,0 +1,19 @@
+﻿@{
+	ViewBag.Title = "Домашняя страница";
+}
+
+<!-- Блок новостей -->
+@foreach (GetByNameLibrary.Domains.TwitterEntry item in ViewBag.Entries)
+{
+	<div class="panel Tweet">
+		<div class="row">
+			<div class="Tweet_image">
+				<img src="@item.ImageUser" />
+			</div>
+			<div class="Tweet_name"><a href="http://twitter.com/@item.ScreenName">@item.ScreenName</a> | <span class="Tweet_date">@item.Date</span></div>
+			<div class="Tweet_text">@item.Text</div>
+		</div>
+	</div>
+}
+
+
