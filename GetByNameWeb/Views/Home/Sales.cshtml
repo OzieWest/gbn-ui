@@ -1,0 +1,117 @@
+﻿@model List<GetByNameLibrary.Domains.GameEntry>
+
+@{
+	ViewBag.Title = "Поиск низких цен онлайн по ТОПу российских магазинов. Спецпредложения и распродажи игр. Скидки на игры. ";
+	ViewBag.Keywords = "новости компании, игровые новости, новости распродаж, онлайн игры, games, games online, куплю игры, купить игры, игры купить магазин, какую игру купить, игра года купить, куплю диски с играми, купить дешевые игры, купить игры дешево";
+	ViewBag.Description = "Самые дешевые игры. Поиск и сравнение цен на игры по ТОПу российских магазинов. Распродажи игр онлайн, скидки на игры. Игры дешево.";
+}
+
+<!-- Блок состояния поиска -->
+<div class="row">
+	<div class="large-12 columns subheader"><span class="SpecialLink">Вы искали:</span> <span id="search_string">скидки</span></div>
+	<div class="large-12 columns subheader"><span class="page_name">Найдено:</span> <span id="search_count">@ViewBag.Count</span></div>
+</div>
+
+<div class="row">
+	<div class="large-9 columns">
+		<table id="table_search_result">
+			<thead>
+				<tr>
+					<th>Игра</th>
+					<th>Магазин</th>
+					<th>Цена (руб)</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				@foreach (var item in Model)
+	{        
+					<tr class="table_item">
+						<td class="table_item_name"><a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a></td>
+						<td class="table_item_store">
+							@if (item.StoreUrl == "http://store.steampowered.com")
+	   {                                
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/steam.png" />
+									Steam</a>
+	   }
+	   else if (item.StoreUrl == "http://roxen.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/roxen.png" />
+									Roxen</a>
+	   }
+	   else if (item.StoreUrl == "http://direct.cod.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/directcod.png" />
+									DirectCod</a>
+	   }
+	   else if (item.StoreUrl == "http://yuplay.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/yuplay.png" />
+									Yuplay</a>
+	   }
+	   else if (item.StoreUrl == "http://gama-gama.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/gama-gama.png" />
+									Gama-Gama</a>
+	   }
+	   else if (item.StoreUrl == "http://gamazavr.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/gamazavr.png" />
+									Gamazavr</a>
+	   }
+	   else if (item.StoreUrl == "http://shop.1csc.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/shop1c.png" />
+									1С СофтКлаб</a>
+	   }
+	   else if (item.StoreUrl == "http://igromagaz.ru")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/igromagaz.png" />
+									Igromagaz</a>
+	   }
+	   else if (item.StoreUrl == "http://store.origin.com")
+	   {
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+									<img src="../../Content/favicons/origin.png" />
+									Origin</a>
+	   }
+						</td>
+						<td class="table_item_cost">@item.Cost</td>
+					</tr>
+	}
+			</tbody>
+		</table>
+	</div>
+	<div class="large-3 columns">
+		@Html.Partial("_sidemenu")
+	</div>
+</div>
+
+<!-- Scripts block -->
+<script src="../../Scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		/*поиск не релевантных результатов*/
+		var nodes = $('.table_item');
+		for (i = 0; i < nodes.length; i++) {
+			var name = nodes[i].cells[0].textContent;
+			if (name.indexOf("Xbox") > -1 || name.indexOf("XBOX") > -1 || name.indexOf("PS3") > -1 || name.indexOf("Ps3") > -1) {
+				nodes[i].style.background = "#ffa2a2";
+				nodes[i].style.display = "none";
+			}
+		}
+
+		$('#table_search_result').tablesorter();
+	}
+);
+</script>
+

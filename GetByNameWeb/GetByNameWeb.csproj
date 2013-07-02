@@ -191,6 +191,15 @@
   <ItemGroup>
     <Content Include="Content\background0.png" />
     <Content Include="Content\background1.png" />
+    <Content Include="Content\favicons\directcod.png" />
+    <Content Include="Content\favicons\gama-gama.png" />
+    <Content Include="Content\favicons\gamazavr.png" />
+    <Content Include="Content\favicons\igromagaz.png" />
+    <Content Include="Content\favicons\origin.png" />
+    <Content Include="Content\favicons\roxen.png" />
+    <Content Include="Content\favicons\shop1c.png" />
+    <Content Include="Content\favicons\steam.png" />
+    <Content Include="Content\favicons\yuplay.png" />
     <Content Include="Content\foundation.min.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -255,6 +264,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.tablesorter.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -303,6 +313,10 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_searchbox.cshtml" />
     <Content Include="Views\Shared\_sidemenu.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Sales.cshtml" />
+    <Content Include="Views\Home\Critic.cshtml" />
+    <Content Include="Views\Home\Coops.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

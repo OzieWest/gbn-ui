@@ -1,0 +1,73 @@
+﻿@model List<GetByNameLibrary.Domains.MetaEntry>
+
+@{
+	ViewBag.Title = "Поиск низких цен онлайн по ТОПу российских магазинов. Спецпредложения и распродажи игр. Скидки на игры. ";
+	ViewBag.Keywords = "новости компании, игровые новости, новости распродаж, онлайн игры, games, games online, куплю игры, купить игры, игры купить магазин, какую игру купить, игра года купить, куплю диски с играми, купить дешевые игры, купить игры дешево";
+	ViewBag.Description = "Самые дешевые игры. Поиск и сравнение цен на игры по ТОПу российских магазинов. Распродажи игр онлайн, скидки на игры. Игры дешево.";
+}
+
+<!-- Content block -->
+<div class="row">
+	<p id="Title">/Игровые оценки</p>
+</div>
+
+<div class="row">
+	<div class="large-9 columns">
+		<table id="table_search_result">
+			<thead>
+				<tr>
+					<th>Название игры</th>
+					<th>Критики</th>
+					<th>Игроки</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var item in Model)
+	{        
+					<tr class="table_item">
+						<td class="table_item_name"><a href="/Home/Search?name=@item.Name">@item.Name</a></td>
+
+						@if (item.MetaScore > 75)
+	  {
+							<td class="table_item_metascore SuccessColor">@item.MetaScore</td>
+	  }
+	  else if (item.MetaScore < 50)
+	  {
+							<td class="table_item_metascore SucksColor">@item.MetaScore</td>
+	  }
+	  else
+	  {
+							<td class="table_item_metascore">@item.MetaScore</td>
+	  }
+						@if (item.UserScore > 75)
+	  {
+							<td class="table_item_userscore SuccessColor">@item.UserScore</td>
+	  }
+	  else if (item.UserScore < 50)
+	  {
+							<td class="table_item_userscore SucksColor">@item.UserScore</td>
+	  }
+	  else
+	  {
+							<td class="table_item_userscore">@item.UserScore</td>
+	  }
+
+					</tr>
+	}
+			</tbody>
+		</table>
+	</div>
+	<div class="large-3 columns">
+		@Html.Partial("_sidemenu")
+	</div>
+</div>
+
+<!-- Scripts block -->
+<script src="../../Scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#table_search_result').tablesorter();
+	}
+);
+</script>

@@ -1,0 +1,70 @@
+﻿@model List<GetByNameLibrary.Domains.CoopEntry>
+
+@{
+	ViewBag.Title = "Поиск низких цен онлайн по ТОПу российских магазинов. Спецпредложения и распродажи игр. Кооперативные игры. ";
+	ViewBag.Keywords = "новости компании, игровые новости, новости распродаж, онлайн игры, games, games online, куплю игры, купить игры, игры купить магазин, какую игру купить, игра года купить, куплю диски с играми, купить дешевые игры, купить игры дешево";
+	ViewBag.Description = "Самые дешевые игры. Поиск и сравнение цен на игры по ТОПу российских магазинов. Распродажи игр онлайн, скидки на игры. Игры дешево.";
+}
+
+<!-- Content block -->
+<div class="row">
+	<p id="Title">/Кооперативные игры</p>
+</div>
+
+<div class="row">
+	<div class="large-9 columns">
+		<table id="table_search_result">
+			<thead>
+				<tr>
+					<th>Игра</th>
+					<th>Offline</th>
+					<th>Online</th>
+					<th>Lan</th>
+					<th>Mode</th>
+					<th>Campaign</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var item in Model)
+	{        
+					<tr class="table_item">
+						<td class="table_item_name"><a href="/Home/Search?name=@item.Name">@item.Name</a></td>
+						<td class="table_item_offline">@item.Offline</td>
+						<td class="table_item_online">@item.Online</td>
+						<td class="table_item_lan">@item.Lan</td>
+						@if (item.CoopMode == "No")
+	  {
+							<td class="table_item_coopmode SucksColor">@item.CoopMode</td>
+	  }
+	  else
+	  {
+							<td class="table_item_coopmode SuccessColor">@item.CoopMode</td>
+	  }
+						@if (item.CoopComp == "No")
+	  {
+							<td class="table_item_coopcamp SucksColor">@item.CoopComp</td>
+	  }
+	  else
+	  {
+							<td class="table_item_coopcamp SuccessColor">@item.CoopComp</td>
+	  }
+
+					</tr>
+	}
+			</tbody>
+		</table>
+	</div>
+	<div class="large-3 columns">
+		@Html.Partial("_sidemenu")
+	</div>
+</div>
+
+<!-- Scripts block -->
+<script src="../../Scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#table_search_result').tablesorter();
+	}
+);
+</script>

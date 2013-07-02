@@ -1,19 +1,49 @@
 ﻿@{
-	ViewBag.Title = "Домашняя страница";
+	ViewBag.Title = "Поиск низких цен онлайн по ТОПу российских магазинов. Спецпредложения и распродажи игр. Скидки на игры. ";
+	ViewBag.Keywords = "новости компании, игровые новости, новости распродаж, онлайн игры, games, games online, куплю игры, купить игры, игры купить магазин, какую игру купить, игра года купить, куплю диски с играми, купить дешевые игры, купить игры дешево";
+	ViewBag.Description = "Самые дешевые игры. Поиск и сравнение цен на игры по ТОПу российских магазинов. Распродажи игр онлайн, скидки на игры. Игры дешево.";
 }
 
-<!-- Блок новостей -->
-@foreach (GetByNameLibrary.Domains.TwitterEntry item in ViewBag.Entries)
-{
-	<div class="panel Tweet">
-		<div class="row">
-			<div class="Tweet_image">
-				<img src="@item.ImageUser" />
+<!-- Content block -->
+<div class="row">
+	<p id="Title"> /Наши твиты</p>
+</div>
+
+<div class="row">
+	<div class="large-9 columns">
+		@foreach (GetByNameLibrary.Domains.TwitterEntry item in ViewBag.Entries)
+  {
+			<div class="panel Tweet">
+				<div class="row">
+					<div class="Tweet_image">
+						<img src="@item.ImageUser" />
+					</div>
+					<div class="Tweet_name"><a href="http://twitter.com/@item.ScreenName">@item.ScreenName</a> | <span class="Tweet_date">@item.Date</span></div>
+					<div class="Tweet_text">@item.Text</div>
+				</div>
 			</div>
-			<div class="Tweet_name"><a href="http://twitter.com/@item.ScreenName">@item.ScreenName</a> | <span class="Tweet_date">@item.Date</span></div>
-			<div class="Tweet_text">@item.Text</div>
-		</div>
+  }
+
+
 	</div>
-}
+	<div class="large-3 columns">
+		@Html.Partial("_sidemenu")
+	</div>
+</div>
+
+<!-- Scripts block -->
+<script>
+	$(document).ready(function () {
+		var nodes = $(".Tweet_text");
+		for (i = 0; i < nodes.length; i++) {
+			var str = nodes[i].textContent.match(/((http(s)?:\/\/)|(www\.))([^\.]+)\.([^\s]+)/i);
+			if (str != null) {
+				nodes[i].innerHTML = nodes[i].innerHTML.replace(str[0], "<a href=" + str[0] + ">" + str[0] + "</a>");
+			}
+		}
+	}
+);
+</script>
+
 
 
