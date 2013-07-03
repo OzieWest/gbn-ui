@@ -37,16 +37,20 @@
 
 	<div class="row" id="Container">
 		@RenderBody()
+		<div class="page-buffer"></div>
 	</div>
 
-	<div class="row">
-		<div id="footer">
+	<div id="footer" class="row">
+		<div class="row">
 			<ul id="footer_menu" class="breadcrumbs">
 				<li>@Html.ActionLink("Новости", "Index", "Home")</li>
 				<li>@Html.ActionLink("Скидки", "Sales", "Home")</li>
 				<li>@Html.ActionLink("Игровые оценки", "Critic", "Home", new { @class = "SpecialLink" })</li>
 				<li>@Html.ActionLink("Играем вместе", "Coops", "Home", new { @class = "SpecialLink" })</li>
 			</ul>
+		</div>
+		<div class="row">
+			<p id="copyright">© 2013</p>
 		</div>
 	</div>
 </body>

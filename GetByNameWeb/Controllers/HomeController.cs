@@ -29,7 +29,7 @@ namespace GetByNameWeb.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Search(String name)
+		public ActionResult Search(String name = "скидки")
 		{
 			var original = name;
 			name = new Replacer().DelWithRegex(name);
