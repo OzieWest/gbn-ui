@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
-	
+
 	<meta name="keywords" content="@ViewBag.Keywords">
 	<meta name="description" content="@ViewBag.Description">
 	<meta name='yandex-verification' content='5c2ea3788e9be409' />
@@ -12,7 +12,7 @@
 
 	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-	
+
 	<script src="~/Scripts/jquery-1.7.1.min.js"></script>
 	@Styles.Render("~/Content/foundation.min.css")
 	@Styles.Render("~/Content/normalize.css")
@@ -20,21 +20,23 @@
 </head>
 <body>
 	<div id="header" class="row">
-		<div class="large-6 columns">
-			<ul id="header_menu" class="breadcrumbs">
-				<li>@Html.ActionLink("Новости", "Index", "Home")</li>
-				<li>@Html.ActionLink("Скидки", "Sales", "Home")</li>
-				<li>@Html.ActionLink("Игровые оценки", "Critic", "Home", new { @class = "SpecialLink" })</li>
-				<li>@Html.ActionLink("Играем вместе", "Coops", "Home", new { @class = "SpecialLink" })</li>
-			</ul>
-		</div>
-		<div class="large-6 columns">
-			@Html.Partial("_searchbox")
+		<div id="header_in" class="row">
+			<div class="large-8 columns">
+				<ul id="header_menu" class="breadcrumbs">
+					<li>@Html.ActionLink("Новости", "Index", "Home")</li>
+					<li>@Html.ActionLink("Скидки", "Sales", "Home")</li>
+					<li>@Html.ActionLink("Игровые оценки", "Critic", "Home", new { @class = "SpecialLink" })</li>
+					<li>@Html.ActionLink("Играем вместе", "Coops", "Home", new { @class = "SpecialLink" })</li>
+				</ul>
+			</div>
+			<div class="large-4 columns">
+				@Html.Partial("_searchbox")
+			</div>
 		</div>
 	</div>
 
 	<div class="row" id="Container">
-			@RenderBody()
+		@RenderBody()
 	</div>
 
 	<div class="row">

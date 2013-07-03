@@ -23,9 +23,9 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			ViewBag.Entries = _serializer.Load<List<TwitterEntry>>(@"tweets.json");
+			var list = _serializer.Load<List<TwitterEntry>>(@"query/tweets.json");
 
-			return View();
+			return View(list);
 		}
 
 		[HttpGet]
@@ -36,7 +36,7 @@ namespace GetByNameWeb.Controllers
 
 			if (!String.IsNullOrEmpty(name) && name != "скидки" && name.Length < 60)
 			{
-				var list = _serializer.Load<List<GameEntry>>(@"games.json")
+				var list = _serializer.Load<List<GameEntry>>(@"query/games.json")
 									  .Where(ent => ent.SearchString.Contains(name))
 									  .OrderBy(ent => ent.SearchString)
 									  .ToList();
@@ -53,7 +53,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Sales()
 		{
-			var list = _serializer.Load<List<GameEntry>>(@"sales.json")
+			var list = _serializer.Load<List<GameEntry>>(@"query/sales.json")
 								  .OrderBy(ent => ent.SearchString)
 								  .ToList();
 									
@@ -65,7 +65,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Critic()
 		{	
-			var list = _serializer.Load<List<MetaEntry>>(@"meta.json")
+			var list = _serializer.Load<List<MetaEntry>>(@"query/metacritic.json")
 								  .OrderBy(ent => ent.Name)
 								  .ToList();
 
@@ -77,7 +77,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Coops()
 		{
-			var list = _serializer.Load<List<CoopEntry>>(@"coops.json")
+			var list = _serializer.Load<List<CoopEntry>>(@"query/coops.json")
 								  .OrderBy(ent => ent.Name)
 								  .ToList();
 
