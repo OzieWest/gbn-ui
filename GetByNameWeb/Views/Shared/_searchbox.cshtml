@@ -1,6 +1,6 @@
 ﻿<!-- Блок поиска -->
-<div id="SearchBlock" class="row">
-	<div class="large-12 columns ui-widget">
+<div id="SearchBlock" class="row collapse">
+	<div class="large-12 columns">
 		@using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @id = "form_get" }))
   {
 			<input id="tags" name="name" type="text" placeholder="Название игры" />
