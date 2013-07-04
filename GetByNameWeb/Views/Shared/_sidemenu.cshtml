@@ -1,13 +1,22 @@
 ﻿<div class="panel SidePanel">
 	<h5>ТОП запросов</h5>
 	<ul class="sidemenu_items">
-		<li><a href="/Home/Search?name=BioShock+Infinite">BioShock Infinite</a></li>
-		<li><a href="/Home/Search?name=Arma+3">Arma 3</a></li>
-		<li><a href="/Home/Search?name=SimCity">SimCity</a></li>
-		<li><a href="/Home/Search?name=Tomb+Raider">Tomb Raider</a></li>
-		<li><a href="/Home/Search?name=Dead+space+3">Dead Space 3</a></li>
-		<li><a href="/Home/Search?name=Resident+Evil+6">Resident Evil 6</a></li>
-		<li><a href="/Home/Search?name=Metro+Last+Light">Metro: Last Light</a></li>
+
+		@foreach (GetByNameLibrary.Domains.MetaEntry item in ViewBag.TopGames)
+  {
+	  String _name = String.Empty;
+
+	  if (@item.Name.Length > 29)
+	  {
+		  _name = item.Name.Substring(0, 30) + "...";
+	  }
+	  else
+	  {
+		  _name = item.Name;
+	  }
+	  
+	  <li><a href="/Home/Search?name=@item.Name">@_name</a></li>
+  }
 	</ul>
 </div>
 

@@ -29,6 +29,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
+			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
 
@@ -40,6 +41,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Search(String name = "скидки")
 		{
+			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
 
@@ -65,6 +67,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Sales()
 		{
+			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
 
@@ -80,6 +83,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Critic()
 		{
+			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
 
@@ -95,6 +99,7 @@ namespace GetByNameWeb.Controllers
 		[HttpGet]
 		public ActionResult Coops()
 		{
+			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
 
@@ -105,6 +110,15 @@ namespace GetByNameWeb.Controllers
 			ViewBag.Count = list.Count;
 
 			return View(list);
+		}
+
+		private List<MetaEntry> GetTopGames()
+		{
+			return _serializer.Load<List<MetaEntry>>(@"query/metacritic.json")
+								  .OrderByDescending(ent => ent.UserScore)
+								  .Take(10)
+								  .ToList();
+
 		}
 	}
 }
