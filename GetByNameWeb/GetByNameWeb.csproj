@@ -50,7 +50,7 @@
       <HintPath>..\..\lib\ReturnValues.dll</HintPath>
     </Reference>
     <Reference Include="SerializeLibra">
-      <HintPath>..\..\lib\serializer\SerializeLibra.dll</HintPath>
+      <HintPath>..\..\lib\SerializeLibra.dll</HintPath>
     </Reference>
     <Reference Include="SimpleLogger">
       <HintPath>..\..\lib\SimpleLogger.dll</HintPath>

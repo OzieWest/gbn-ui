@@ -28,61 +28,83 @@
 				@foreach (var item in Model)
 	{
 					<tr class="table_item">
-						<td class="table_item_name"><a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a></td>
+						<td class="table_item_name">
+							<noindex>
+								<noindex><a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a>
+							</noindex>
+						</td>
 						<td class="table_item_store">
 							@if (item.StoreUrl == "http://store.steampowered.com")
 	   {                                
-								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+								<noindex>
+									<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/steam.png" />
 									Steam</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://roxen.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/roxen.png" />
 									Roxen</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://yuplay.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/yuplay.png" />
 									Yuplay</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://gama-gama.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/gama-gama.png" />
 									Gama-Gama</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://gamazavr.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/gamazavr.png" />
 									Gamazavr</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://shop.1csc.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/shop1c.png" />
 									1С СофтКлаб</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://igromagaz.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/igromagaz.png" />
 									Igromagaz</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://direct.cod.ru")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/directcod.png" />
 									Direct.COD</a>
+								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://store.origin.com")
 	   {
+								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/origin.png" />
 									Origin</a>
+								<noindex>
 	   }
 						</td>
 						<td class="table_item_cost">@item.Cost</td>

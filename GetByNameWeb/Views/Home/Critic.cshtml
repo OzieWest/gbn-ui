@@ -26,7 +26,11 @@
 				@foreach (var item in Model)
 	{        
 					<tr class="table_item">
-						<td class="table_item_name"><a href="/Home/Search?name=@item.Name">@item.Name</a></td>
+						<td class="table_item_name">
+							<noindex>
+								<a rel="nofollow" href="/Home/Search?name=@item.Name">@item.Name</a>
+							</noindex>
+						</td>
 
 						@if (item.MetaScore > 75)
 	  {
