@@ -12,11 +12,13 @@
 
 	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	
+	<script src="~/Scripts/jquery.js"></script>
+	<link href="~/Content/foundation.min.css" rel="stylesheet" />
+	<link href="~/Content/normalize.css" rel="stylesheet" />
+	<link href="~/Content/Site.css" rel="stylesheet" />
 
-	<script src="~/Scripts/jquery-1.7.1.min.js"></script>
-	@Styles.Render("~/Content/foundation.min.css")
-	@Styles.Render("~/Content/normalize.css")
-	@Styles.Render("~/Content/Site.css")
+	@Html.Partial("_YandexMetrika")
 </head>
 <body>
 	<div id="header" class="row">

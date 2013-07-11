@@ -87,7 +87,7 @@ namespace GetByNameWeb.Controllers
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
 
-			var list = _serializer.Load<List<MetaEntry>>(@"query/metacritic.json")
+			var list = _serializer.Load<List<MetaEntry>>(@"query/metas.json")
 								  .OrderBy(ent => ent.Name)
 								  .ToList();
 
@@ -114,7 +114,7 @@ namespace GetByNameWeb.Controllers
 
 		private List<MetaEntry> GetTopGames()
 		{
-			return _serializer.Load<List<MetaEntry>>(@"query/metacritic.json")
+			return _serializer.Load<List<MetaEntry>>(@"query/metas.json")
 								  .OrderByDescending(ent => ent.UserScore)
 								  .Take(10)
 								  .ToList();
