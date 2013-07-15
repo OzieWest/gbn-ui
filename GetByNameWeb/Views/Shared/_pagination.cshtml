@@ -1,0 +1,23 @@
+﻿<!-- Блок пагинации -->
+<div id="PaginationBlock" class="row collapse">
+	@{
+		var count = 0;
+	}
+
+	<ul class="pagination">
+		@for (int i = 1; i < ViewBag.Pagination + 1; i++)
+  {
+			<li><a href="/Home/Search?name=@ViewBag.Search&skip=@count">@i</a></li>
+	  count += 50;
+  }
+	</ul>
+</div>
+
+@*<!-- Скрипт пагинации -->
+<script type="text/javascript">
+		$(function ($) {
+			$('ul.pagination li a').filter(function () {
+				return $(this).attr('href').toLowerCase() === window.location.pathname.toLowerCase();
+			}).addClass('SpecialColor');
+		});
+</script>*@

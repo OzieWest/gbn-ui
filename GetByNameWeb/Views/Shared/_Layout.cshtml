@@ -12,7 +12,7 @@
 
 	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link href='http://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-	
+
 	<script src="~/Scripts/jquery.js"></script>
 	<link href="~/Content/foundation.min.css" rel="stylesheet" />
 	<link href="~/Content/normalize.css" rel="stylesheet" />
@@ -25,10 +25,10 @@
 		<div id="header_in" class="row">
 			<div class="large-7 columns">
 				<ul id="header_menu" class="breadcrumbs">
-					<li>@Html.ActionLink("Новости", "Index", "Home")</li>
-					<li>@Html.ActionLink("Скидки", "Sales", "Home")</li>
-					<li>@Html.ActionLink("Игровые оценки", "Critic", "Home", new { @class = "SpecialLink" })</li>
-					<li>@Html.ActionLink("Играем вместе", "Coops", "Home", new { @class = "SpecialLink" })</li>
+					<li>@Html.ActionLink("Новости", "Index", new { controller = "Home" })</li>
+					<li>@Html.ActionLink("Скидки", "Sales", new { controller = "Home" })</li>
+					<li>@Html.ActionLink("Игровые оценки", "Critic", new { controller = "Home" })</li>
+					<li>@Html.ActionLink("Играем вместе", "Coops", new { controller = "Home" })</li>
 				</ul>
 			</div>
 			<div class="large-5 columns">
@@ -47,13 +47,21 @@
 			<ul id="footer_menu" class="breadcrumbs">
 				<li>@Html.ActionLink("Новости", "Index", "Home")</li>
 				<li>@Html.ActionLink("Скидки", "Sales", "Home")</li>
-				<li>@Html.ActionLink("Игровые оценки", "Critic", "Home", new { @class = "SpecialLink" })</li>
-				<li>@Html.ActionLink("Играем вместе", "Coops", "Home", new { @class = "SpecialLink" })</li>
+				<li>@Html.ActionLink("Игровые оценки", "Critic", "Home")</li>
+				<li>@Html.ActionLink("Играем вместе", "Coops", "Home")</li>
 			</ul>
 		</div>
 		<div class="row">
 			<p id="copyright">© 2013</p>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		$(function ($) {
+			$('#header_menu li a, #footer_menu li a').filter(function () {
+				return $(this).attr('href').toLowerCase() === window.location.pathname.toLowerCase();
+			}).addClass('SpecialColor');
+		});
+	</script>
 </body>
 </html>

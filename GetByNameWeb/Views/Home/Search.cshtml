@@ -8,13 +8,14 @@
 
 <!-- Блок состояния поиска -->
 <div class="row">
-	<div class="large-12 columns subheader"><span class="SpecialLink">Вы искали:</span> <span id="search_string">@ViewBag.Search</span></div>
-	<div class="large-12 columns subheader"><span class="page_name">Найдено:</span> <span id="search_count">@ViewBag.Count</span></div>
+	<div class="large-12 columns subheader"><span class="SpecialColor">Вы искали:</span> <span id="search_string">@ViewBag.Search</span></div>
+	<div class="large-12 columns subheader"><span class="SpecialColor">Показано:</span>  <span id="search_count">@ViewBag.Count</span></div>
 </div>
 
 <!-- Content block -->
 <div class="row">
 	<div class="large-9 columns">
+		<noindex>
 		<table id="table_search_result">
 			<thead>
 				<tr>
@@ -26,13 +27,12 @@
 
 			<tbody>
 				@foreach (var item in Model)
-		{
+	{
 					<tr class="table_item">
 						<td class="table_item_name">
-							<noindex>
-								<noindex><a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a>
-							</noindex>
+							<a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a>
 						</td>
+
 						<td class="table_item_store">
 							@if (item.StoreUrl == "http://store.steampowered.com")
 	   {                                
@@ -112,6 +112,10 @@
 	}
 			</tbody>
 		</table>
+		</noindex>
+
+		@Html.Partial("_pagination")
+
 	</div>
 	<div class="large-3 columns">
 		@Html.Partial("_sidemenu")
@@ -121,18 +125,31 @@
 <!-- Scripts block -->
 <script src="../../Scripts/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function () {
-		/*поиск не релевантных результатов*/
-		var nodes = $('.table_item');
-		for (i = 0; i < nodes.length; i++) {
-			var name = nodes[i].cells[0].textContent;
-			if (name.indexOf("Xbox") > -1 || name.indexOf("XBOX") > -1 || name.indexOf("PS3") > -1 || name.indexOf("Ps3") > -1) {
-				nodes[i].style.background = "#ffa2a2";
-				nodes[i].style.display = "none";
-			}
-		}
 
-		$('#table_search_result').tablesorter({ sortList: [[0, 0], [2, 0]] });
+	// add parser through the tablesorter addParser method 
+	$.tablesorter.addParser({
+		// set a unique id 
+		id: 'links',
+		is: function (s) {
+			// return false so this parser is not auto detected 
+			return false;
+		},
+		format: function (s) {
+			// format your data for normalization 
+			return s.replace(new RegExp(/<.*?>/), "");
+		},
+		// set type, either numeric or text
+		type: 'text'
+	});
+
+	$(document).ready(function () {
+		$("#table_search_result").tablesorter({
+			headers: {
+				0: {
+					sorter: 'links'
+				}
+			}
+		});
 	}
-);
+	);
 </script>

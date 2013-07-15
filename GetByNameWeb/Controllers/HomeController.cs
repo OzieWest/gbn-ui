@@ -16,14 +16,16 @@ namespace GetByNameWeb.Controllers
 		ISerializer _serializer;
 		String uploadTime;
 		String uploadCount;
+		int step;
 
 		public HomeController()
 		{
 			_serializer = new JsonSerializer();
 
-			var list = _serializer.Load<List<String>>(@"query\statistic.json");
+			var list = _serializer.Load<List<String>>(@"query/statistic.json");
 			uploadTime = list[0];
 			uploadCount = list[1];
+			step = 50;
 		}
 
 		[HttpGet]
@@ -39,29 +41,43 @@ namespace GetByNameWeb.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Search(String name = "скидки")
+		public ActionResult Search(String skip, String name = "скидки")
 		{
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
+			ViewBag.Search = name;
 
-			var original = name;
 			name = new Replacer().DelWithRegex(name);
 
 			if (!String.IsNullOrEmpty(name) && name != "скидки" && name.Length < 60)
 			{
+				int countSkip;
+				Int32.TryParse(skip, out countSkip);
+
 				var list = _serializer.Load<List<GameEntry>>(@"query/games.json")
 									  .Where(ent => ent.SearchString.Contains(name))
-									  .OrderBy(ent => ent.SearchString)
-									  .ToList();
+									  .OrderBy(ent => ent.SearchString);
 
-				ViewBag.Count = list.Count;
-				ViewBag.Search = original;
+				ViewBag.Count = list.Count();
 
-				return View(list);
+				var result = list.Skip(countSkip)
+							.Take(step)
+							.ToList();
+
+				ViewBag.Pagination = this.GetPagination(list.Count(), step);
+
+				return View(result);
 			}
 			else
 				return RedirectToAction("Sales");
+		}
+
+		protected int GetPagination(int count, int step)
+		{
+			int result = (count % step > 0) ? (count / step) + 1 : (count / step);
+
+			return result;
 		}
 
 		[HttpGet]
