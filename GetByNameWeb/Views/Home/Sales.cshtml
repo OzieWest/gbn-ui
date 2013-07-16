@@ -110,6 +110,12 @@
 	}
 			</tbody>
 		</table>
+
+		@if(ViewBag.Pagination > 1)
+  {
+		@Html.Partial("_pagination")
+  }
+
 	</div>
 	<div class="large-3 columns">
 		@Html.Partial("_sidemenu")

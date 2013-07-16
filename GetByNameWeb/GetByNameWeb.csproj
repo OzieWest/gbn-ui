@@ -342,6 +342,7 @@
     <Content Include="Views\Home\Critic.cshtml" />
     <Content Include="Views\Home\Coops.cshtml" />
     <Content Include="Views\Shared\_YandexMetrika.cshtml" />
+    <Content Include="Views\Shared\_searchPagination.cshtml" />
     <Content Include="Views\Shared\_pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>

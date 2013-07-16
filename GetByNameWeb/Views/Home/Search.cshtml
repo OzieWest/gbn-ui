@@ -114,7 +114,10 @@
 		</table>
 		</noindex>
 
-		@Html.Partial("_pagination")
+		@if(ViewBag.Pagination > 1)
+  {
+		@Html.Partial("_searchPagination")
+  }
 
 	</div>
 	<div class="large-3 columns">

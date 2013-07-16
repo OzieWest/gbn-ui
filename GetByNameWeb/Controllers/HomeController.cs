@@ -50,7 +50,7 @@ namespace GetByNameWeb.Controllers
 
 			name = new Replacer().DelWithRegex(name);
 
-			if (!String.IsNullOrEmpty(name) && name != "скидки" && name.Length < 60)
+			if (!String.IsNullOrEmpty(name) && name.Length > 2 && name.Length < 60 && name != "скидки")
 			{
 				int countSkip;
 				Int32.TryParse(skip, out countSkip);
@@ -80,9 +80,13 @@ namespace GetByNameWeb.Controllers
 			return result;
 		}
 
+		
 		[HttpGet]
-		public ActionResult Sales()
+		public ActionResult Sales(String skip)
 		{
+			int countSkip;
+			Int32.TryParse(skip, out countSkip);
+
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
@@ -93,12 +97,22 @@ namespace GetByNameWeb.Controllers
 									
 			ViewBag.Count = list.Count;
 
-			return View(list);
+			var result = list.Skip(countSkip)
+							.Take(step)
+							.ToList();
+
+			ViewBag.Pagination = this.GetPagination(list.Count(), step);
+			ViewBag.Section = "Sales";
+
+			return View(result);
 		}
 
 		[HttpGet]
-		public ActionResult Critic()
+		public ActionResult Critic(String skip)
 		{
+			int countSkip;
+			Int32.TryParse(skip, out countSkip);
+
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
@@ -109,12 +123,22 @@ namespace GetByNameWeb.Controllers
 
 			ViewBag.Count = list.Count;
 
-			return View(list);
+			var result = list.Skip(countSkip)
+							.Take(step)
+							.ToList();
+
+			ViewBag.Pagination = this.GetPagination(list.Count(), step);
+			ViewBag.Section = "Critic";
+
+			return View(result);
 		}
 
 		[HttpGet]
-		public ActionResult Coops()
+		public ActionResult Coops(String skip)
 		{
+			int countSkip;
+			Int32.TryParse(skip, out countSkip);
+
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
@@ -123,9 +147,14 @@ namespace GetByNameWeb.Controllers
 								  .OrderBy(ent => ent.Name)
 								  .ToList();
 
-			ViewBag.Count = list.Count;
+			var result = list.Skip(countSkip)
+							.Take(step)
+							.ToList();
 
-			return View(list);
+			ViewBag.Pagination = this.GetPagination(list.Count(), step);
+			ViewBag.Section = "Coops";
+
+			return View(result);
 		}
 
 		private List<MetaEntry> GetTopGames()

@@ -7,17 +7,27 @@
 	<ul class="pagination">
 		@for (int i = 1; i < ViewBag.Pagination + 1; i++)
   {
-			<li><a href="/Home/Search?name=@ViewBag.Search&skip=@count">@i</a></li>
+			<li><a href="~/Home/@ViewBag.Section?skip=@count">@i</a></li>
 	  count += 50;
   }
 	</ul>
 </div>
 
-@*<!-- Скрипт пагинации -->
+<!-- Скрипт пагинации -->
 <script type="text/javascript">
-		$(function ($) {
-			$('ul.pagination li a').filter(function () {
-				return $(this).attr('href').toLowerCase() === window.location.pathname.toLowerCase();
-			}).addClass('SpecialColor');
+	$.urlParam = function (name) {
+		var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		return results[1] || 0;
+	}
+
+	$(function ($) {
+
+		var a = $('.pagination li a').filter(function () {
+			var b = $(this).attr('href').toLowerCase();
+			var c = window.location.pathname.toLowerCase() + "?skip=" + $.urlParam('skip');
+			return b === c;
 		});
-</script>*@
+
+		a.addClass('SpecialColor');
+	});
+</script>
