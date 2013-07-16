@@ -21,6 +21,7 @@
 	@Html.Partial("_YandexMetrika")
 </head>
 <body>
+	<a name="top"></a>
 	<div id="header" class="row">
 		<div id="header_in" class="row">
 			<div class="large-7 columns">
@@ -31,9 +32,17 @@
 					<li>@Html.ActionLink("Играем вместе", "Coops", new { controller = "Home" })</li>
 				</ul>
 			</div>
-			<div class="large-5 columns">
+			<div class="large-4 columns">
 				@Html.Partial("_searchbox")
 			</div>
+			<div class="large-1 columns">
+				<div id="OnTopBlock" class="NotDisplay">
+					<a rel="nofollow" href="#top">
+						<img title="Путь на верх" width="30" height="30" src="~/Images/iconontop1.png" />
+					</a>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -62,6 +71,18 @@
 				return $(this).attr('href').toLowerCase() === window.location.pathname.toLowerCase();
 			}).addClass('SpecialColor');
 		});
+		var $document = $(document),
+			$element = $('#OnTopBlock'),
+			className = 'hasScrolled';
+
+		$document.scroll(function () {
+			if ($document.scrollTop() >= 50) {
+				$element.fadeIn(500);
+			} else {
+				$element.fadeOut(500);
+			}
+		});
+
 	</script>
 </body>
 </html>

@@ -71,6 +71,11 @@ a:hover {
     height: 90px;
 }
 
+.NotDisplay {
+	display: none;
+	margin-top: 10px;
+}
+
 #SearchBlock {
     margin-top: 10px;
 }
