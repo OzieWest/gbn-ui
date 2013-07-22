@@ -59,13 +59,15 @@ namespace GetByNameWeb.Controllers
 									  .Where(ent => ent.SearchString.Contains(name))
 									  .OrderBy(ent => ent.SearchString);
 
-				ViewBag.Count = list.Count();
 
 				var result = list.Skip(countSkip)
 							.Take(step)
 							.ToList();
 
 				ViewBag.Pagination = this.GetPagination(list.Count(), step);
+
+				var paginationValue = GetPaginationCount(countSkip, list.Count(), step);
+				ViewBag.Count = String.Format("с {0} по {1} из ({2})", countSkip, paginationValue, list.Count());
 
 				return View(result);
 			}
@@ -80,7 +82,22 @@ namespace GetByNameWeb.Controllers
 			return result;
 		}
 
-		
+		protected int GetPaginationCount(int countNow, int countAll, int step)
+		{
+			int result = 0;
+
+			if (countNow + step < countAll)
+			{
+				result = countNow + step;
+			}
+			else if (countNow + step > countAll)
+			{
+				result = countAll;
+			}
+
+			return result;
+		}
+
 		[HttpGet]
 		public ActionResult Sales(String skip)
 		{
@@ -95,7 +112,6 @@ namespace GetByNameWeb.Controllers
 								  .OrderBy(ent => ent.SearchString)
 								  .ToList();
 									
-			ViewBag.Count = list.Count;
 
 			var result = list.Skip(countSkip)
 							.Take(step)
@@ -103,6 +119,10 @@ namespace GetByNameWeb.Controllers
 
 			ViewBag.Pagination = this.GetPagination(list.Count(), step);
 			ViewBag.Section = "Sales";
+
+			var paginationValue = GetPaginationCount(countSkip, list.Count(), step);
+
+			ViewBag.Count = String.Format("с {0} по {1} из ({2})", countSkip, paginationValue, list.Count());
 
 			return View(result);
 		}
