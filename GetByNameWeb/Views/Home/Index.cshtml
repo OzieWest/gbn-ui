@@ -11,7 +11,7 @@
 
 <!-- Content block -->
 <div class="row">
-	<div class="large-9 columns">
+	<div class="large-9 columns Main">
 		@foreach (var item in Model)
   {
 			<div class="panel Tweet">
@@ -20,7 +20,7 @@
 						<img src="@item.ImageUser" />
 					</div>
 					<div class="Tweet_name">
-						<noindex><a rel="nofollow" target="_blank" href="http://twitter.com/@item.ScreenName">@item.ScreenName</a></noindex> | <span class="Tweet_date">@item.Date</span>
+						<a rel="nofollow" target="_blank" href="http://twitter.com/@item.ScreenName">@item.ScreenName</a> | <span class="Tweet_date">@item.Date</span>
 					</div>
 					<div class="Tweet_text">@item.Text</div>
 				</div>
@@ -34,16 +34,17 @@
 
 <!-- Scripts block -->
 <script>
-	$(document).ready(function () {
-		var nodes = $(".Tweet_text");
-		for (i = 0; i < nodes.length; i++) {
-			var str = nodes[i].textContent.match(/((http(s)?:\/\/)|(www\.))([^\.]+)\.([^\s]+)/i);
-			if (str != null) {
-				nodes[i].innerHTML = nodes[i].innerHTML.replace(str[0], "<a href=" + str[0] + ">" + str[0] + "</a>");
-			}
-		}
+	function replaceURLWithHTMLLinks(text) {
+		var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&#\/%?=~_|!:,.;]*[-A-Z0-9+&#\/%=~_|])/ig;
+		return text.replace(exp, "<a href='$1'>$1</a>");
 	}
-);
+
+	$(document).ready(function () {
+		$(".Tweet_text").each(function (i) {
+			var text = $(this).html();
+			$(this).html(replaceURLWithHTMLLinks(text));
+		});
+	});
 </script>
 
 
