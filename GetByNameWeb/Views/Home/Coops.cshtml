@@ -6,7 +6,8 @@
 	ViewBag.Description = "Самые дешевые игры. Поиск и сравнение цен на игры по ТОПу российских магазинов. Распродажи игр онлайн, скидки на игры. Игры дешево.";
 }
 
-<div class="padding_block">
+<div class="row">
+	<div class="large-12 columns subheader"><span class="page_name SpecialColor">Показано:</span> <span id="search_count">@ViewBag.Count</span></div>
 </div>
 
 <!-- Content block -->
@@ -29,9 +30,7 @@
 	{        
 					<tr class="table_item">
 						<td class="table_item_name">
-							<noindex>
 								<a rel="nofollow" href="/Home/Search?name=@item.Name">@item.Name</a>
-							</noindex>
 						</td>
 						<td class="table_item_offline">@item.Offline</td>
 						<td class="table_item_online">@item.Online</td>
@@ -57,10 +56,6 @@
 	}
 			</tbody>
 		</table>
-				@if(ViewBag.Pagination > 1)
-  {
-		@Html.Partial("_pagination")
-  }
 	</div>
 	<div class="large-3 columns">
 		@Html.Partial("_sidemenu")
@@ -68,10 +63,5 @@
 </div>
 
 <!-- Scripts block -->
-<script src="../../Scripts/jquery.tablesorter.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('#table_search_result').tablesorter();
-	}
-);
-</script>
+<script src="~/Scripts/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/OnloadSortTableResult.js"></script>

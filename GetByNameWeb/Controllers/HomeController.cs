@@ -16,7 +16,6 @@ namespace GetByNameWeb.Controllers
 		ISerializer _serializer;
 		String uploadTime;
 		String uploadCount;
-		int step;
 
 		public HomeController()
 		{
@@ -25,7 +24,6 @@ namespace GetByNameWeb.Controllers
 			var list = _serializer.Load<List<String>>(@"query/statistic.json");
 			uploadTime = list[0];
 			uploadCount = list[1];
-			step = 50;
 		}
 
 		[HttpGet]
@@ -41,7 +39,7 @@ namespace GetByNameWeb.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Search(String skip, String name = "скидки")
+		public ActionResult Search(String name = "скидки")
 		{
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
@@ -52,24 +50,14 @@ namespace GetByNameWeb.Controllers
 
 			if (!String.IsNullOrEmpty(name) && name.Length > 2 && name.Length < 60 && name != "скидки")
 			{
-				int countSkip;
-				Int32.TryParse(skip, out countSkip);
-
 				var list = _serializer.Load<List<GameEntry>>(@"query/games.json")
 									  .Where(ent => ent.SearchString.Contains(name))
-									  .OrderBy(ent => ent.SearchString);
+									  .OrderBy(ent => ent.SearchString)
+									  .ToList();
 
+				ViewBag.Count = list.Count();
 
-				var result = list.Skip(countSkip)
-							.Take(step)
-							.ToList();
-
-				ViewBag.Pagination = this.GetPagination(list.Count(), step);
-
-				var paginationValue = GetPaginationCount(countSkip, list.Count(), step);
-				ViewBag.Count = String.Format("с {0} по {1} из ({2})", countSkip, paginationValue, list.Count());
-
-				return View(result);
+				return View(list);
 			}
 			else
 				return RedirectToAction("Sales");
@@ -99,11 +87,8 @@ namespace GetByNameWeb.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult Sales(String skip)
+		public ActionResult Sales()
 		{
-			int countSkip;
-			Int32.TryParse(skip, out countSkip);
-
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
@@ -113,26 +98,14 @@ namespace GetByNameWeb.Controllers
 								  .ToList();
 									
 
-			var result = list.Skip(countSkip)
-							.Take(step)
-							.ToList();
+			ViewBag.Count = list.Count();
 
-			ViewBag.Pagination = this.GetPagination(list.Count(), step);
-			ViewBag.Section = "Sales";
-
-			var paginationValue = GetPaginationCount(countSkip, list.Count(), step);
-
-			ViewBag.Count = String.Format("с {0} по {1} из ({2})", countSkip, paginationValue, list.Count());
-
-			return View(result);
+			return View(list);
 		}
 
 		[HttpGet]
-		public ActionResult Critic(String skip)
+		public ActionResult Critic()
 		{
-			int countSkip;
-			Int32.TryParse(skip, out countSkip);
-
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
@@ -143,22 +116,12 @@ namespace GetByNameWeb.Controllers
 
 			ViewBag.Count = list.Count;
 
-			var result = list.Skip(countSkip)
-							.Take(step)
-							.ToList();
-
-			ViewBag.Pagination = this.GetPagination(list.Count(), step);
-			ViewBag.Section = "Critic";
-
-			return View(result);
+			return View(list);
 		}
 
 		[HttpGet]
-		public ActionResult Coops(String skip)
+		public ActionResult Coops()
 		{
-			int countSkip;
-			Int32.TryParse(skip, out countSkip);
-
 			ViewBag.TopGames = this.GetTopGames();
 			ViewBag.UploadTime = uploadTime;
 			ViewBag.UploadCount = uploadCount;
@@ -167,14 +130,9 @@ namespace GetByNameWeb.Controllers
 								  .OrderBy(ent => ent.Name)
 								  .ToList();
 
-			var result = list.Skip(countSkip)
-							.Take(step)
-							.ToList();
+			ViewBag.Count = list.Count;
 
-			ViewBag.Pagination = this.GetPagination(list.Count(), step);
-			ViewBag.Section = "Coops";
-
-			return View(result);
+			return View(list);
 		}
 
 		private List<MetaEntry> GetTopGames()

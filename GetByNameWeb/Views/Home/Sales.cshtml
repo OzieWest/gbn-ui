@@ -29,9 +29,7 @@
 	{
 					<tr class="table_item">
 						<td class="table_item_name">
-							<noindex>
-								<a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a>
-							</noindex>
+							<a rel="nofollow" href="@item.GameUrl" target="_blank">@item.Title</a>
 						</td>
 						<td class="table_item_store">
 							@if (item.StoreUrl == "http://store.steampowered.com")
@@ -42,67 +40,51 @@
 	   }
 	   else if (item.StoreUrl == "http://roxen.ru")
 	   {
-								<noindex>
-									<a rel="nofollow" href="@item.StoreUrl" target="_blank">
+								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/roxen.png" />
 									Roxen</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://direct.cod.ru")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/directcod.png" />
 									DirectCod</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://yuplay.ru")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/yuplay.png" />
 									Yuplay</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://gama-gama.ru")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/gama-gama.png" />
 									Gama-Gama</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://gamazavr.ru")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/gamazavr.png" />
 									Gamazavr</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://shop.1csc.ru")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/shop1c.png" />
 									1С СофтКлаб</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://igromagaz.ru")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/igromagaz.png" />
 									Igromagaz</a>
-								</noindex>
 	   }
 	   else if (item.StoreUrl == "http://store.origin.com")
 	   {
-								<noindex>
 								<a rel="nofollow" href="@item.StoreUrl" target="_blank">
 									<img src="../../Content/favicons/origin.png" />
 									Origin</a>
-								</noindex>
 	   }
 						</td>
 						<td class="table_item_cost">@item.Cost</td>
@@ -110,12 +92,6 @@
 	}
 			</tbody>
 		</table>
-
-		@if(ViewBag.Pagination > 1)
-  {
-		@Html.Partial("_pagination")
-  }
-
 	</div>
 	<div class="large-3 columns">
 		@Html.Partial("_sidemenu")
@@ -123,7 +99,9 @@
 </div>
 
 <!-- Scripts block -->
-<script src="../../Scripts/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/jquery.tablesorter.min.js"></script>
+<script src="~/Scripts/OnloadSortTableResult.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		/*поиск не релевантных результатов*/
@@ -135,8 +113,6 @@
 				nodes[i].style.display = "none";
 			}
 		}
-
-		$('#table_search_result').tablesorter();
 	}
 );
 </script>

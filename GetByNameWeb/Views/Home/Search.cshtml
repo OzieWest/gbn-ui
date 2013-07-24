@@ -113,12 +113,6 @@
 			</tbody>
 		</table>
 		</noindex>
-
-		@if(ViewBag.Pagination > 1)
-  {
-		@Html.Partial("_searchPagination")
-  }
-
 	</div>
 	<div class="large-3 columns">
 		@Html.Partial("_sidemenu")
@@ -127,32 +121,4 @@
 
 <!-- Scripts block -->
 <script src="../../Scripts/jquery.tablesorter.min.js"></script>
-<script type="text/javascript">
-
-	// add parser through the tablesorter addParser method 
-	$.tablesorter.addParser({
-		// set a unique id 
-		id: 'links',
-		is: function (s) {
-			// return false so this parser is not auto detected 
-			return false;
-		},
-		format: function (s) {
-			// format your data for normalization 
-			return s.replace(new RegExp(/<.*?>/), "");
-		},
-		// set type, either numeric or text
-		type: 'text'
-	});
-
-	$(document).ready(function () {
-		$("#table_search_result").tablesorter({
-			headers: {
-				0: {
-					sorter: 'links'
-				}
-			}
-		});
-	}
-	);
-</script>
+<script src="~/Scripts/OnloadSortTableResult.js"></script>
