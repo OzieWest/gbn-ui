@@ -1,7 +1,2 @@
-GetByNameWeb
-============
-VisualStudio 2012 solution
-
-GetByName WebSite
-
-Проект ЗАКРЫТ
+### UI for webstore parser
+##### project was closed
